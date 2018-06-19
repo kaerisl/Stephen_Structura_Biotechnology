@@ -35,4 +35,4 @@ Closing remarks and feedback:
 I found the challenge pretty interesting, it was my first time working with Flask and MongoDB, even though I have prior experience with Python and SQL, 
 learning about how MongoDB approaches queries is pretty neat. Sorry if you have any issues running my scripts, I was programming on my Windows machine using
 Git Bash, as I don't have memory to run my VMWare, although I do believe everything should be fully functional, but do not hesitate to contact me if there is 
-a problem.
+a problem. 	

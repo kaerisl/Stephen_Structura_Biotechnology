@@ -2,7 +2,7 @@ git clone https://github.com/cryoem-uoft/structura-techchallenge-assets temp
 mkdir db
 mkdir dump
 mkdir assets
-mv temp/ assets/
+mv temp/* assets/
 rm -rf temp
 
 mongod --dbpath db
@@ -15,5 +15,5 @@ for i in assets/*.jpg; do
     python addFile.py $filename $width $height $size
 done
 
-export FLASK_APP=main.py 
-flask run --port=3000
+# export FLASK_APP=main.py 
+# flask run --port=3000

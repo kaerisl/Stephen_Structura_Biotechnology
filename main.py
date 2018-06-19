@@ -26,6 +26,15 @@ db = client.img_database
 app = Flask(__name__)
 mongo = PyMongo(app)
 
+@app.route('/')
+def index():
+	collection = db.img_collection
+	sub_col = collection.find()
+	temp = ''
+	for i in sub_col:
+		temp = temp + i["imagename"] + ', ' 
+	return temp[:-2]
+
 @app.route('/list')
 def list(max_width = -1,min_area = -1,min_bits_per_pix = -1):
 	if request.args.get('max_width'):
@@ -43,7 +52,6 @@ def list(max_width = -1,min_area = -1,min_bits_per_pix = -1):
 			{'$match': { 'area': {'$gte': min_area} } },
 			{'$project': { 'imagename': 1, 'bits_per_pix': {'$multiply':[{'$divide':['$size','$area']},8 ]} } },
 			{'$match': { 'bits_per_pix': {'$gte': min_bits_per_pix} } },
-			{'$project': { '_id':0, 'imagename': 1  } }
 			])
 	else:
 		sub_col = collection.aggregate([ 
@@ -51,9 +59,11 @@ def list(max_width = -1,min_area = -1,min_bits_per_pix = -1):
 			{'$match': { 'area': {'$gte': min_area} } },
 			{'$project': { 'imagename': 1, 'bits_per_pix': {'$multiply':[{'$divide':['$size','$area']},8 ]} } },
 			{'$match': { 'bits_per_pix': {'$gte': min_bits_per_pix} } },
-			{'$project': { '_id':0, 'imagename': 1  } }
 			])
-	return dumps(sub_col)
+	temp = ''
+	for i in sub_col:
+		temp = temp + i["imagename"] + ', ' 
+	return temp[:-2]
 
 @app.route('/image/<imagename>/<filtertype>')
 def image(imagename, filtertype):
