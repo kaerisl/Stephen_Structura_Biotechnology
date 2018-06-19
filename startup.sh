@@ -15,5 +15,5 @@ for i in assets/*.jpg; do
     python addFile.py $filename $width $height $size
 done
 
-# export FLASK_APP=main.py 
-# flask run --port=3000
+export FLASK_APP=imageserver.py 
+flask run --port=3000
